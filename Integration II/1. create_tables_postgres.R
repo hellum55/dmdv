@@ -4,7 +4,7 @@ library(httr2)
 library(tidyverse)
 # .credentials file can be moved to the main rstudio folder to
 # avoid duplication of .credentials in each project directory.
-source("~/dmdv/Integration 1/credentials.R")
+source("~/dmdv/Integration 1/.credentials.R")
 # Function to send queries to Postgres
 source("psql_queries.R")
 

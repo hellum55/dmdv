@@ -4,7 +4,7 @@ library(tidyverse)
 library(httr2)
 library(lubridate)
 # Load credentials
-source("~/dmdv/Integration 1/credentials.R")
+source("~/dmdv/Integration 1/.credentials.R")
 # Load functions to communicate with Postgres
 source("psql_queries.R")
 # Extract Microsoft prices  ------------------------------------------
