@@ -12,10 +12,10 @@ source("psql_queries.R")
 psql_manipulate(cred = cred_psql_docker,
                 query_string = 
                   "delete 
-                   from quotes.prices
+                   from stock.prices
                    where
                    price_sk = (select price_sk 
-                              from quotes.prices
+                              from stock.prices
                               where symbol_fk = 1
                               order by timestamp_utc desc
                               limit 1);")
@@ -23,7 +23,7 @@ psql_manipulate(cred = cred_psql_docker,
 psql_select(cred = cred_psql_docker, 
             query_string = 
               "select timestamp_utc 
-               from quotes.prices
+               from stock.prices
                where symbol_fk = 1
                order by timestamp_utc desc
                limit 5;")
@@ -33,7 +33,7 @@ source("~/dmdv/Integration II/2. API_to_db_scheduled.R")
 psql_select(cred = cred_psql_docker, 
             query_string = 
               "select * 
-               from quotes.prices
+               from stock.prices
                where symbol_fk = 1
                order by timestamp_utc desc
                limit 5;")
@@ -42,10 +42,10 @@ psql_select(cred = cred_psql_docker,
 psql_manipulate(cred = cred_psql_docker,
                 query_string = 
                   "delete 
-                   from quotes.prices
+                   from stock.prices
                    where
                    price_sk = (select price_sk 
-                              from quotes.prices
+                              from stock.prices
                               where symbol_fk = 2
                               order by timestamp_utc desc
                               limit 1);")
@@ -53,7 +53,7 @@ psql_manipulate(cred = cred_psql_docker,
 psql_select(cred = cred_psql_docker, 
             query_string = 
               "select * 
-               from quotes.prices
+               from stock.prices
                where symbol_fk = 2
                order by timestamp_utc desc
                limit 5;")
@@ -63,7 +63,7 @@ source("~/dmdv/Integration II/2. API_to_db_scheduled.R")
 psql_select(cred = cred_psql_docker, 
             query_string = 
               "select * 
-               from quotes.prices
+               from stock.prices
                where symbol_fk = 2
                order by timestamp_utc desc
                limit 5;")

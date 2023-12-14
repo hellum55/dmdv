@@ -37,7 +37,7 @@ for (i in 1:nrow(df)) {
 latest_tmstmp <- psql_select(cred = cred_psql_docker, 
                              query_string = 
                                "select timestamp_utc 
-                                from quotes.prices
+                                from stock.prices
                                 where symbol_fk = 1
                                 order by timestamp_utc desc
                                 limit 1;")
@@ -47,7 +47,7 @@ df <- df[df$timestamp_utc > latest_tmstmp[[1]],]
 print(paste0(round(Sys.time()), ": Updating Microsoft prices")) 
 
 psql_append_df(cred = cred_psql_docker,
-               schema_name = "quotes",
+               schema_name = "stock",
                tab_name = "prices",
                df = df)
 # Extract Tesla prices  ------------------------------------------
@@ -80,7 +80,7 @@ for (i in 1:nrow(df)) {
 latest_tmstmp <- psql_select(cred = cred_psql_docker, 
                              query_string = 
                                "select timestamp_utc 
-                                from quotes.prices
+                                from stock.prices
                                 where symbol_fk = 2
                                 order by timestamp_utc desc
                                 limit 1;")
@@ -90,7 +90,7 @@ df <- df[df$timestamp_utc > latest_tmstmp[[1]],]
 print(paste0(round(Sys.time()), ": Updating Tesla prices")) 
 
 psql_append_df(cred = cred_psql_docker,
-               schema_name = "quotes",
+               schema_name = "stock",
                tab_name = "prices",
                df = df)
 

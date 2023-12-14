@@ -10,12 +10,12 @@ source("psql_queries.R")
 
 # Create a new schema in Postgres on docker
 psql_manipulate(cred = cred_psql_docker, 
-                query_string = "CREATE SCHEMA quotes;")
+                query_string = "CREATE SCHEMA stock;")
 # Create table to hold metadata about stock prices ----------------------------------------------------
 # Create symbols table with symbols metadata
 psql_manipulate(cred = cred_psql_docker, 
                 query_string = 
-                  "create table quotes.symbols (
+                  "create table stock.symbols (
 	symbol_sk serial primary key,
 	symbol varchar(50),
 	name varchar(150),
@@ -28,18 +28,18 @@ psql_manipulate(cred = cred_psql_docker,
 # Populate table with metainformation about Microsoft and Tesla -------------------------------
 psql_manipulate(cred = cred_psql_docker, 
                 query_string = 
-                  "insert into quotes.symbols
+                  "insert into stock.symbols
                 values (default, 'MSFT', 'Microsoft Corporation', 'Equity', 'United States', '09:30', '16:00', 'UTC-04', 'currency'),
                        (default, 'TSLA', 'Tesla Inc', 'Equity', 'United States', '09:30', '16:00', 'UTC-04', 'currency');")
 
 # Check data has been correctly inserted in symbols table
 psql_select(cred = cred_psql_docker,
-            query_string = "select * from quotes.symbols")
+            query_string = "select * from stock.symbols")
 
 # Create table to hold price data -----------------------------------------
 psql_manipulate(cred = cred_psql_docker, 
                 query_string = 
-                  "create table quotes.prices (
+                  "create table stock.prices (
 	price_sk serial primary key,
 	symbol_fk integer, 
 	timestamp_utc timestamp(0) without time zone ,
@@ -49,7 +49,7 @@ psql_manipulate(cred = cred_psql_docker,
 	close numeric(30,4),
 	volume numeric(30,4),
   constraint fk_symbol foreign key (symbol_fk)
-  references quotes.symbols(symbol_sk));")
+  references stock.symbols(symbol_sk));")
 # Populate price table with Microsoft prices ----------------------------------------------------
 req <- request("https://alpha-vantage.p.rapidapi.com") %>%
   req_url_path("query") %>%
@@ -77,7 +77,7 @@ for (i in 1:nrow(df)) {
 }
 # Load Microsoft price data into prices
 psql_append_df(cred = cred_psql_docker,
-               schema_name = "quotes",
+               schema_name = "stock",
                tab_name = "prices",
                df = df)
 # Populate price table with Tesla prices ----------------------------------------------------
@@ -107,12 +107,12 @@ for (i in 1:nrow(df)) {
 }
 # Load Tesla price data into prices
 psql_append_df(cred = cred_psql_docker,
-               schema_name = "quotes",
+               schema_name = "stock",
                tab_name = "prices",
                df = df)
 # Check that we have populated the tables as intended ---------------------
 psql_select(cred = cred_psql_docker,
-            query_string = "select * from quotes.prices")
+            query_string = "select * from stock.prices")
 # Deleting schema if necessary --------------------------------------------
 #psql_manipulate(cred = cred_psql_docker,
-#               query_string = "drop SCHEMA quotes cascade;")
+#              query_string = "drop SCHEMA ibm cascade;")
