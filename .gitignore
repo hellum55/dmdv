@@ -3,4 +3,5 @@
 .RData
 .Ruserdata
 .credentials.R
-credentials.r
+credentials.R
+.credentials
