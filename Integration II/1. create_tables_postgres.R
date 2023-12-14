@@ -115,4 +115,4 @@ psql_select(cred = cred_psql_docker,
             query_string = "select * from stock.prices")
 # Deleting schema if necessary --------------------------------------------
 #psql_manipulate(cred = cred_psql_docker,
-#              query_string = "drop SCHEMA ibm cascade;")
+#              query_string = "drop SCHEMA stock cascade;")
