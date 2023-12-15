@@ -68,9 +68,6 @@ result <- resp %>%
 
 result$data$detections
 
-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
-
-
 # POST dry run example ------------------------------------------------------------
 # Body as an R list
 req_body <- list(x = c(1, 2, 3), y = c("a", "b", "c"))
@@ -102,7 +99,7 @@ resp %>%
 
 # POST with rapid API -----------------------------------------------------
 req <- request("https://google-translate1.p.rapidapi.com/language/translate/v2") %>% 
-  req_headers('X-RapidAPI-Key' = "b1974985e6msh21f518f4fea290bp189d01jsnbcf11a089d57",
+  req_headers('X-RapidAPI-Key' = "76e03ed26fmsh346fa818a10a5c4p1cdcc2jsne6f21bf17ab8",
               'X-RapidAPI-Host' = 'google-translate1.p.rapidapi.com' ) %>%
   req_body_form(q = "Hello, world!",
                 target = "da")
@@ -112,4 +109,4 @@ resp <- req %>%
 result <- resp %>%
   resp_body_json()
 
-result$data$translations
+result$data$

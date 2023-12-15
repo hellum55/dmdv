@@ -114,5 +114,5 @@ psql_append_df(cred = cred_psql_docker,
 psql_select(cred = cred_psql_docker,
             query_string = "select * from stock.prices")
 # Deleting schema if necessary --------------------------------------------
-#psql_manipulate(cred = cred_psql_docker,
-#              query_string = "drop SCHEMA stock cascade;")
+psql_manipulate(cred = cred_psql_docker,
+              query_string = "drop SCHEMA stock cascade;")
