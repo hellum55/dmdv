@@ -39,7 +39,7 @@ cron_clear()
 cmd <- cron_rscript(rscript = "increment_one.R")
 # Exercise 10
 # Assuming the current day is Saturday
-cron_add(cmd, frequency = 'minutely', id = 'job7', days_of_week = c(1))
+cron_add(cmd, frequency = 'minutely', id = 'job7', days_of_week = c(6))
 # Exercise 11
 cron_add(cmd, frequency = 'daily', id = 'job8', days_of_month = c(15),
          at = "04:00")

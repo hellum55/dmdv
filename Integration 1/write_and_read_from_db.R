@@ -2,9 +2,9 @@ library(RPostgres)
 library(DBI)
 # Put the credentials in this script
 # Never push credentials to git!! --> use .gitignore on .credentials.R
-source(".credentials.R")
+source("~/dmdv/Integration 1/.credentials.R")
 # Function to send queries to Postgres
-source("psql_queries.R")
+source("~/dmdv/Integration 1/psql_queries.R")
 # Create a new schema in Postgres on docker
 psql_manipulate(cred = cred_psql_docker, 
                 query_string = "CREATE SCHEMA intg1;")
