@@ -37,17 +37,10 @@ resp %>%
 #Above you can change in which format you want
 
 # GET with string response --------------------------------------------
-# String
-#Send an API request with the following specifications
-n <- 70
-x1 <- rnorm(n=n)
-x2 <- rnorm(n=n)
-y <- 2*x1+3*x2+rnorm(n=n)
-df <- round(data.frame(y=y, x1=x1, x2=x2))
-
+# json
 req <- request("http://165.22.92.178:8080") %>% 
-  req_url_path("lm") %>%
-  req_body_json(as.list(df)) %>%
+  req_url_path("responses") %>%
+  req_url_query(format = "json") %>%
   req_headers(authorization = "DM_DV_123#!")
 
 response <- req %>% 
@@ -56,17 +49,17 @@ response # Inspect content type
 response %>%
   resp_body_json()
 
-req <- request("https://google-translate1.p.rapidapi.com/language/translate/v2/detect") %>% 
-  req_headers('X-RapidAPI-Key' = '76e03ed26fmsh346fa818a10a5c4p1cdcc2jsne6f21bf17ab8',
-              'X-RapidAPI-Host' = 'google-translate1.p.rapidapi.com') %>%
-  req_body_form(q = "hvad skød du den med")
+#html
+req <- request("http://165.22.92.178:8080") %>% 
+  req_url_path("responses") %>%
+  req_url_query(format = "html") %>%
+  req_headers(authorization = "DM_DV_123#!")
 
-resp <- req %>% 
+response <- req %>% 
   req_perform()
-result <- resp %>%
-  resp_body_json()
-
-result$data$detections
+response # Inspect content type
+response %>%
+  resp_body_html()
 
 # POST dry run example ------------------------------------------------------------
 # Body as an R list
