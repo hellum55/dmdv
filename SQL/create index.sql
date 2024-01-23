@@ -13,4 +13,4 @@ values(default, 'blabalabalabakhfjbdjj'),
 create index idx_text_col
 on bi.random_shit(text_col);
 
-dr
+drhjkdwhjkdjsakkdas
